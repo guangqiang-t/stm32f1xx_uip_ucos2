@@ -7,7 +7,6 @@
 #include "stdio.h" //sprintf
 #include "stdlib.h"
 
-
 #ifdef DEBUG 
 	#define APP_LOG(x) print_str(x)
 #else
@@ -18,7 +17,7 @@
 #define RE_OK 		(0)
 #define RE_ERROR1	(1)
 #define RE_ERROR2	(2)
-#define RE_TEMP	(3)
+#define RE_TEMP	  (3)
 #define RE_ERROR4	(4)
 
 
@@ -83,10 +82,10 @@ void status_led_task(void * pdata)
 	while(1)
 	{
 		led_on();
-		delay_ms(200);
+		delay_ms(100);
 //		print_arg("temp is",get_temp());
 		led_off();
-		delay_ms(2800);
+		delay_ms(1900);
 	}
 }
 
@@ -97,8 +96,9 @@ void eth_task(void *pdata)
 //	sig_msg_to_process=OSSemCreate(0);
 	while(1)
 	{
-		//user_tcp_appstate *StatePointer = (user_tcp_appstate *)&uip_conn->appstate;
+		OS_ENTER_CRITICAL();
 		uip_polling();	
+		OS_EXIT_CRITICAL();
 		if(g_tcp_server_state&(1<<6))
 		{
 //			print_str(tcp_sever_receive_data_buff);
@@ -106,7 +106,7 @@ void eth_task(void *pdata)
 			OSSemPost(sig_msg_to_process);
 			//sig_process();
 
-			OSSemPend(sig_msg_process_complete,0,&sem_err);
+			OSSemPend(sig_msg_process_complete,32,&sem_err);
 			//send data
 			g_tcp_server_state|=(1<<5);// To Send
 			g_tcp_server_state&=~(1<<6);
@@ -279,9 +279,6 @@ void sig_process_task(void *pdata)
 }
 
 
-
-
-
 void sig_process_status(uint8_t err_code)
 {
 	strcpy((char *)tcp_sever_send_data_buff,(char *)tcp_sever_receive_data_buff);
@@ -315,7 +312,6 @@ void sig_process_status(uint8_t err_code)
 		}
 	}
 	memset(tcp_sever_receive_data_buff,UIP_CONF_BUFFER_SIZE,0);
-//	memset(tcp_sever_send_data_buff,UIP_CONF_BUFFER_SIZE,0);
 }
 
 

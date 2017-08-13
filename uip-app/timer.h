@@ -64,7 +64,7 @@
 //#include "clock.h"
 #include <stdint.h>
 #include "os_cfg.h"
-extern volatile  uint16_t g_current_clock;
+extern volatile  uint32_t g_current_clock;
 
 /**
  * A timer.
@@ -79,16 +79,16 @@ extern volatile  uint16_t g_current_clock;
  
 typedef struct
 {
-  uint16_t start;
-  uint16_t interval;
+  uint32_t start;
+  uint32_t interval;
 }timer_typedef;
 
 void timer_config(void);
-uint16_t clock_time(void);
-void timer_set(timer_typedef *t, uint16_t interval);
+uint32_t clock_time(void);
+void timer_set(timer_typedef *t, uint32_t interval);
 void timer_reset(timer_typedef *t);
 void timer_restart(timer_typedef *t);
-int16_t timer_expired(timer_typedef *t);
+uint32_t timer_expired(timer_typedef *t);
 
 #endif /* __TIMER_H__ */
 

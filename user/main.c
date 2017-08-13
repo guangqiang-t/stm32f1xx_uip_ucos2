@@ -12,16 +12,30 @@
 	#define MAIN_LOG(x) 
 #endif
 
+void __delay(void)
+{
+	volatile uint32_t i=0x7FFFFF;
+	while(i--);
+}
+
+
 int main (void)
 {
-
+	__delay();
 	usart1_config();
 	led_init();
 	NVIC_Config();
 	logic_config();
-
 	sw_config();
+	internal_temp_config();
 	pwm_config(200);
+
+//	sync_sw(HK,NO);
+//	sync_sw(HK,NO);
+//	__delay();
+//	sync_sw(HK,NC);
+//	sync_sw(HK,NC);
+//		__delay();
 	sync_pwm(led_w,0);
 	sync_pwm(motor,0);
 	sync_pwm(led_g,0);
@@ -29,8 +43,6 @@ int main (void)
 	sync_pwm(led_b,0);
 		
 	tcp_server_init();
-
-	internal_temp_config();
 
 	MAIN_LOG("system init ok\r\n");
 	

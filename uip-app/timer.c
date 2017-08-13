@@ -49,7 +49,7 @@
 #include "stm32f10x.h"
 #include "timer.h"
 
-volatile  uint16_t g_current_clock=0;
+volatile  uint32_t g_current_clock=0;
 
 
 void timer_config(void)
@@ -57,7 +57,7 @@ void timer_config(void)
 	g_current_clock=0;
 }
 
-uint16_t clock_time(void)
+uint32_t clock_time(void)
 {
     return g_current_clock;
 }
@@ -74,7 +74,7 @@ uint16_t clock_time(void)
  * \param interval The interval before the timer expires.
  *
  */
-void timer_set(timer_typedef *t, uint16_t interval)
+void timer_set(timer_typedef *t, uint32_t interval)
 {
   t->interval = interval;
   t->start = clock_time();
@@ -89,7 +89,7 @@ void timer_set(timer_typedef *t, uint16_t interval)
  * function will cause the timer to be stable over time, unlike the
  * timer_rester() function.
  *
- * \param t A pointer to the timer.
+ * \param t A pointer to the timer.1
  *
  * \sa timer_restart()
  */
@@ -128,9 +128,9 @@ void timer_restart(timer_typedef *t)
  * \return Non-zero if the timer has expired, zero otherwise.
  *
  */
-int16_t timer_expired(timer_typedef *t)
+uint32_t timer_expired(timer_typedef *t)
 {
-  if ((int16_t)(clock_time() - t->start) >= (int16_t)t->interval)
+  if ((int32_t)(clock_time() - (int32_t)t->start) >= (int32_t)t->interval)
 		return 1;
 	else
 		return 0;

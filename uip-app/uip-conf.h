@@ -10,11 +10,11 @@ typedef uint16_t                  u16_t;
 typedef unsigned short            uip_stats_t;
 
 /* 最大TCP连接数 */
-#define UIP_CONF_MAX_CONNECTIONS  2
+#define UIP_CONF_MAX_CONNECTIONS  4
 /* 最大端口监听数 */
 #define UIP_CONF_MAX_LISTENPORTS  6	  
 /* uIP 缓存大小*/
-#define UIP_CONF_BUFFER_SIZE      96
+#define UIP_CONF_BUFFER_SIZE      128
 /* CPU字节顺序 */ 
 #define UIP_CONF_BYTE_ORDER       UIP_LITTLE_ENDIAN
 /* 日志开关	 */			

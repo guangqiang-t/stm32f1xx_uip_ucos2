@@ -5,7 +5,7 @@
 
 // MACµØÖ·
 struct uip_eth_addr   uip_mac;
-static uint8_t  ethernet_mac[6] = {0x00,0x14,0x0B,0x3F,0x04,0xB1};       
+static uint8_t  ethernet_mac[6] = {0xAC,0x0D,0x25,0x85,0xB3,0xB1};       
 /*
 ********************************************************************************
 * º¯ Êı Ãû: tapdev_init

@@ -73,10 +73,10 @@ void tcp_server_init(void)
 	tapdev_init();      
 	uip_init();        
 		
-	uip_ipaddr(ipaddr, 192,168,0,128);    
+	uip_ipaddr(ipaddr, 192,168,1,128);    
 	uip_sethostaddr(ipaddr);
 		
-	uip_ipaddr(ipaddr, 192,168,0,1);                
+	uip_ipaddr(ipaddr, 192,168,1,1);                
 	uip_setdraddr(ipaddr);
 		
 	uip_ipaddr(ipaddr, 255,255,255,0);            
@@ -156,7 +156,7 @@ void uip_polling(void)
 void tcp_sever_call(void)
 {
  	user_tcp_appstate *StatePointer = (user_tcp_appstate *)&uip_conn->appstate;
-	uip_log("enter tcp_app_call\r\n");
+	//uip_log("enter tcp_app_call\r\n");
 	if(uip_aborted())tcp_server_aborted();		//连接终止
  	if(uip_timedout())tcp_server_timedout();	//连接超时   
 	if(uip_closed())tcp_server_closed();		//连接关闭	   
